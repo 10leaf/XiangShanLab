@@ -1,0 +1,202 @@
+生成 RTL 的地址掩码选择对照（静态生成产物，不是运行时波形）。
+before: e7bab53；after: e7bab53 + 上游 #6882 补丁。
+完整 RTL 保留在本机相应 build 目录，本包只保存选定摘录及完整文件哈希。
+
+
+[before] XiangShan/build.before-fix-6851-20261118-143318/rtl/VLMergeBufferImp.sv
+Full file SHA-256: 2f186b9b9ed743f4aec750852bfd9eecb437490db9a0b70c912c3d8a5d33b24b
+
+4498:     _GEN_277
+4499:       ? pipeBitsReg_0_elemIdx
+4500:       : _GEN_276 ? pipeBitsReg_1_elemIdx : pipeBitsReg_2_elemIdx;
+4501:   wire [15:0]        sel_oldest_bits_mask =
+4502:     _GEN_277 ? pipeBitsReg_0_mask : _GEN_276 ? pipeBitsReg_1_mask : pipeBitsReg_2_mask;
+4503:   wire [63:0]        _GEN_278 =
+4504:     {60'h0,
+4505:      ~entryIsUS | sel_oldest_bits_mask[0]
+4506:        ? 4'h0
+4507:        : sel_oldest_bits_mask[1]
+4508:            ? 4'h1
+4509:            : sel_oldest_bits_mask[2]
+4510:                ? 4'h2
+4511:                : sel_oldest_bits_mask[3]
+4512:                    ? 4'h3
+4513:                    : sel_oldest_bits_mask[4]
+4514:                        ? 4'h4
+4515:                        : sel_oldest_bits_mask[5]
+4516:                            ? 4'h5
+4517:                            : sel_oldest_bits_mask[6]
+4518:                                ? 4'h6
+4519:                                : sel_oldest_bits_mask[7]
+4520:                                    ? 4'h7
+4521:                                    : sel_oldest_bits_mask[8]
+4522:                                        ? 4'h8
+4523:                                        : sel_oldest_bits_mask[9]
+4524:                                            ? 4'h9
+4525:                                            : sel_oldest_bits_mask[10]
+4526:                                                ? 4'hA
+4527:                                                : sel_oldest_bits_mask[11]
+4528:                                                    ? 4'hB
+4529:                                                    : sel_oldest_bits_mask[12]
+4530:                                                        ? 4'hC
+4531:                                                        : sel_oldest_bits_mask[13]
+4532:                                                            ? 4'hD
+4533:                                                            : sel_oldest_bits_mask[14]
+4534:                                                                ? 4'hE
+4535:                                                                : {4{sel_oldest_bits_mask[15]}}};
+4536:   wire [63:0]        _vaddr_T =
+4537:     64'((_GEN_277
+4538:            ? pipeBitsReg_0_vaddr
+4539:            : _GEN_276 ? pipeBitsReg_1_vaddr : pipeBitsReg_2_vaddr) + _GEN_278);
+4540:   wire [63:0]        gpaddr =
+
+[after] XiangShan/build/rtl/VLMergeBufferImp.sv
+Full file SHA-256: 1152f07340334b6b4bb08887bb14aae09475403aa309292fffa5d395394907bb
+
+4500:   wire [7:0]         sel_oldest_bits_elemIdx =
+4501:     _GEN_277
+4502:       ? pipeBitsReg_0_elemIdx
+4503:       : _GEN_276 ? pipeBitsReg_1_elemIdx : pipeBitsReg_2_elemIdx;
+4504:   wire [15:0]        excpMask =
+4505:     sel_oldest_bits_trigger == 4'h0 | sel_oldest_bits_trigger == 4'h1
+4506:       ? (_GEN_277
+4507:            ? pipeBitsReg_0_vecTriggerMask
+4508:            : _GEN_276 ? pipeBitsReg_1_vecTriggerMask : pipeBitsReg_2_vecTriggerMask)
+4509:       : _GEN_277
+4510:           ? pipeBitsReg_0_mask
+4511:           : _GEN_276 ? pipeBitsReg_1_mask : pipeBitsReg_2_mask;
+4512:   wire [63:0]        _GEN_278 =
+4513:     {60'h0,
+4514:      ~entryIsUS | excpMask[0]
+4515:        ? 4'h0
+4516:        : excpMask[1]
+4517:            ? 4'h1
+4518:            : excpMask[2]
+4519:                ? 4'h2
+4520:                : excpMask[3]
+4521:                    ? 4'h3
+4522:                    : excpMask[4]
+4523:                        ? 4'h4
+4524:                        : excpMask[5]
+4525:                            ? 4'h5
+4526:                            : excpMask[6]
+4527:                                ? 4'h6
+4528:                                : excpMask[7]
+4529:                                    ? 4'h7
+4530:                                    : excpMask[8]
+4531:                                        ? 4'h8
+4532:                                        : excpMask[9]
+4533:                                            ? 4'h9
+4534:                                            : excpMask[10]
+4535:                                                ? 4'hA
+4536:                                                : excpMask[11]
+4537:                                                    ? 4'hB
+4538:                                                    : excpMask[12]
+4539:                                                        ? 4'hC
+4540:                                                        : excpMask[13]
+4541:                                                            ? 4'hD
+4542:                                                            : excpMask[14]
+4543:                                                                ? 4'hE
+4544:                                                                : {4{excpMask[15]}}};
+4545:   wire [63:0]        _vaddr_T =
+4546:     64'((_GEN_277
+4547:            ? pipeBitsReg_0_vaddr
+4548:            : _GEN_276 ? pipeBitsReg_1_vaddr : pipeBitsReg_2_vaddr) + _GEN_278);
+4549:   wire [63:0]        gpaddr =
+4550:     sel_oldest_bits_isForVSnonLeafPTE
+
+[before] XiangShan/build.before-fix-6851-20261118-143318/rtl/VSMergeBufferImp.sv
+Full file SHA-256: bc6169c3070dc0dfe622e80b861949c52fe2b3053a339369cbb8d048c4e5969b
+
+3499:         _GEN_17[io_fromPipeline_0_bits_mBIndex]})
+3500:      | _GEN_23[io_fromPipeline_0_bits_mBIndex] == 4'h1)
+3501:     & (|_GEN_164[io_fromPipeline_0_bits_mBIndex]);
+3502:   wire [63:0]        _GEN_165 =
+3503:     {60'h0,
+3504:      ~entryIsUS | io_fromPipeline_0_bits_mask[0]
+3505:        ? 4'h0
+3506:        : io_fromPipeline_0_bits_mask[1]
+3507:            ? 4'h1
+3508:            : io_fromPipeline_0_bits_mask[2]
+3509:                ? 4'h2
+3510:                : io_fromPipeline_0_bits_mask[3]
+3511:                    ? 4'h3
+3512:                    : io_fromPipeline_0_bits_mask[4]
+3513:                        ? 4'h4
+3514:                        : io_fromPipeline_0_bits_mask[5]
+3515:                            ? 4'h5
+3516:                            : io_fromPipeline_0_bits_mask[6]
+3517:                                ? 4'h6
+3518:                                : io_fromPipeline_0_bits_mask[7]
+3519:                                    ? 4'h7
+3520:                                    : io_fromPipeline_0_bits_mask[8]
+3521:                                        ? 4'h8
+3522:                                        : io_fromPipeline_0_bits_mask[9]
+3523:                                            ? 4'h9
+3524:                                            : io_fromPipeline_0_bits_mask[10]
+3525:                                                ? 4'hA
+3526:                                                : io_fromPipeline_0_bits_mask[11]
+3527:                                                    ? 4'hB
+3528:                                                    : io_fromPipeline_0_bits_mask[12]
+3529:                                                        ? 4'hC
+3530:                                                        : io_fromPipeline_0_bits_mask[13]
+3531:                                                            ? 4'hD
+3532:                                                            : io_fromPipeline_0_bits_mask[14]
+3533:                                                                ? 4'hE
+3534:                                                                : {4{io_fromPipeline_0_bits_mask[15]}}};
+3535:   wire [63:0]        _vaddr_T = 64'(io_fromPipeline_0_bits_vaddr + _GEN_165);
+3536:   wire [63:0]        gpaddr =
+3537:     io_fromPipeline_0_bits_isForVSnonLeafPTE
+3538:       ? io_fromPipeline_0_bits_gpaddr
+3539:       : 64'(io_fromPipeline_0_bits_gpaddr + _GEN_165);
+3540:   wire [15:0][7:0]   _GEN_166 =
+
+[after] XiangShan/build/rtl/VSMergeBufferImp.sv
+Full file SHA-256: 5c18f10943a19068f839da75e07f5a3f8f756f86f2d3fef0f14795c7f8a26104
+
+3500:         _GEN_18[io_fromPipeline_0_bits_mBIndex],
+3501:         _GEN_17[io_fromPipeline_0_bits_mBIndex]})
+3502:      | _GEN_23[io_fromPipeline_0_bits_mBIndex] == 4'h1)
+3503:     & (|_GEN_164[io_fromPipeline_0_bits_mBIndex]);
+3504:   wire [15:0]        excpMask =
+3505:     io_fromPipeline_0_bits_trigger == 4'h0 | _isTrigger_T_1
+3506:       ? io_fromPipeline_0_bits_vecTriggerMask
+3507:       : io_fromPipeline_0_bits_mask;
+3508:   wire [63:0]        _GEN_165 =
+3509:     {60'h0,
+3510:      ~entryIsUS | excpMask[0]
+3511:        ? 4'h0
+3512:        : excpMask[1]
+3513:            ? 4'h1
+3514:            : excpMask[2]
+3515:                ? 4'h2
+3516:                : excpMask[3]
+3517:                    ? 4'h3
+3518:                    : excpMask[4]
+3519:                        ? 4'h4
+3520:                        : excpMask[5]
+3521:                            ? 4'h5
+3522:                            : excpMask[6]
+3523:                                ? 4'h6
+3524:                                : excpMask[7]
+3525:                                    ? 4'h7
+3526:                                    : excpMask[8]
+3527:                                        ? 4'h8
+3528:                                        : excpMask[9]
+3529:                                            ? 4'h9
+3530:                                            : excpMask[10]
+3531:                                                ? 4'hA
+3532:                                                : excpMask[11]
+3533:                                                    ? 4'hB
+3534:                                                    : excpMask[12]
+3535:                                                        ? 4'hC
+3536:                                                        : excpMask[13]
+3537:                                                            ? 4'hD
+3538:                                                            : excpMask[14]
+3539:                                                                ? 4'hE
+3540:                                                                : {4{excpMask[15]}}};
+3541:   wire [63:0]        _vaddr_T = 64'(io_fromPipeline_0_bits_vaddr + _GEN_165);
+3542:   wire [63:0]        gpaddr =
+3543:     io_fromPipeline_0_bits_isForVSnonLeafPTE
+3544:       ? io_fromPipeline_0_bits_gpaddr
+3545:       : 64'(io_fromPipeline_0_bits_gpaddr + _GEN_165);

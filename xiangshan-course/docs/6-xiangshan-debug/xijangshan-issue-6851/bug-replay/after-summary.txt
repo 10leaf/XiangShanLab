@@ -1,0 +1,17 @@
+2026-11-18 修复后实测：e7bab53 + 上游 #6882；行号对应 after.log.gz 解压后的原始日志。
+源码 dirty: 1 对应 evidence/applied-fix.diff 中唯一受控改动。
+
+1: emu compiled at Nov 18 2026, 14:52:43
+3: A  vle8.v        vl=9  e8,  tdata2=buf+0x0  : mcause=0x3 mtval=buf+0x0 vstart=0x0  (required: mcause=0x3 mtval=buf+0x0 vstart=0x0)  ok
+4: B  vle8.v        vl=9  e8,  tdata2=buf+0x8  : mcause=0x3 mtval=buf+0x8 vstart=0x8  (required: mcause=0x3 mtval=buf+0x8 vstart=0x8)  ok
+5: C  vle8.v        vl=32 e8,  tdata2=buf+0x18 : mcause=0x3 mtval=buf+0x18 vstart=0x18  (required: mcause=0x3 mtval=buf+0x18 vstart=0x18)  ok
+6: D  vle8.v v0.t   vl=9  e8,  elements 0-3 inactive, tdata2=buf+0x8 : mcause=0x3 mtval=buf+0x8 vstart=0x8  (required: mcause=0x3 mtval=buf+0x8 vstart=0x8)  ok
+7: E  vle32.v       vl=4  e32, tdata2=buf+0x8  : mcause=0x3 mtval=buf+0x8 vstart=0x2  (required: mcause=0x3 mtval=buf+0x8 vstart=0x2)  ok
+8: F  vse8.v        vl=9  e8,  tdata2=buf+0x8  : mcause=0x3 mtval=buf+0x8 vstart=0x8  (required: mcause=0x3 mtval=buf+0x8 vstart=0x8)  ok
+9: G  lb (scalar)              tdata2=buf+0x8  : mcause=0x3 mtval=buf+0x8 vstart=0x0  (required: mcause=0x3 mtval=buf+0x8 vstart=0x0)  ok
+10: PASS
+27871: Core  0's Commit SHA is: e7bab53e66, dirty: 1
+27877: Core 0: HIT GOOD TRAP at pc = 0x80000302
+27878: Core-0 instrCnt = 9,756, cycleCnt = 70,792, IPC = 0.137812
+27879: Seed=0 Guest cycle spent: 70,798 (this will be different from cycleCnt if emu loads a snapshot)
+27880: Host time spent: 519,593ms
